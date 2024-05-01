@@ -8,6 +8,18 @@
     width: 30%;
 }
 
+.catalog-main-div-filters-buttons {
+    padding-left: 27%;
+    margin-top: 30px;
+}
+
+.catalog-main-div-filters-button {
+    margin-left: 20px;
+
+}
+
+
+
 
 details {
     border: 1px solid #aaa;
@@ -96,3 +108,34 @@ body{
     font-size: 170% !important;
 }
 /*userCabinet*/
+
+/*adminCabinet*/
+
+.adminCabinet-main-div-products-nav .adminCabinet-main-div-products-nav-ul{
+    overflow:hidden;
+    overflow-y:scroll;
+    height: 400px;
+}
+
+
+
+.button1 {
+    color: red;
+}
+.button2 {
+    color: blue;
+}
+
+#shape svg {
+    width: 300px;
+    height: 300px;
+    border-radius: 9999px;
+    background-color: grey;
+}
+
+.adminCabinet-statistics-main-div {
+    width: 100%;
+    display: flex;
+}
+
+/*adminCabinet*/

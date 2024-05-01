@@ -44,7 +44,10 @@ public class SecurityConfig {
                 .authorizeHttpRequests(auth -> auth.requestMatchers("elemBase/welcome").permitAll()
                         .requestMatchers("/resources/**").permitAll()
                         .requestMatchers("elemBase/catalog").permitAll()
-                        .requestMatchers("elemBase/**").authenticated())
+                        .requestMatchers("elemBase/catalogFiltered").permitAll()
+                        .requestMatchers("elemBase/catalog/addToOrder").permitAll()
+                        .requestMatchers("elemBase/**").authenticated()
+                        .requestMatchers("elemBase/adminCabinetEdit/edit").authenticated())
                 .formLogin(AbstractAuthenticationFilterConfigurer::permitAll)
                 .build();
     }

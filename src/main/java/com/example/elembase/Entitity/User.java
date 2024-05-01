@@ -8,10 +8,10 @@ import lombok.Data;
 @Table(name = "user")
 public class User {
     @Id
-    @Column(name = "id")
+    @Column(name = "id", unique = true)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(name = "name", unique = true)
+    @Column(name = "name")
     private String name;
     @Column(name = "password")
     private String password;

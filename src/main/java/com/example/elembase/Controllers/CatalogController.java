@@ -1,20 +1,20 @@
 package com.example.elembase.Controllers;
 
 
+import com.example.elembase.Entitity.Filter;
 import com.example.elembase.Services.ProductService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.List;
 
 
 @Controller
-@RequestMapping("elemBase/")
+@RequestMapping("/elemBase")
 public class CatalogController {
 
 
@@ -41,7 +41,22 @@ public class CatalogController {
         model.addAttribute("products", products);
         model.addAttribute("hashFilters", hashFilters);
         model.addAttribute("allProductsNames", allProductsNames);
+        model.addAttribute("filter", new Filter());
+        return "catalog";
+    }
 
+    //This shit don't work
+    @PostMapping("/catalog/useFilter")
+    public String catalogFiltered(@ModelAttribute Filter filter) {
+
+            System.out.println(filter);
+        return "catalogFiltered";
+    }
+
+    @PostMapping("/catalog/addToOrder")
+    public String buttonAddToOrder(@RequestParam String firstName, @RequestParam String lastName) {
+
+        System.out.println(firstName + lastName);
         return "catalog";
     }
 

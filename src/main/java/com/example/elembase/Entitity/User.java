@@ -1,10 +1,15 @@
 package com.example.elembase.Entitity;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
-@Data
+
 @Entity
+@AllArgsConstructor
+@NoArgsConstructor
+@Data
 @Table(name = "user")
 public class User {
     @Id

@@ -24,6 +24,7 @@ public class UserService {
     }
 
     public void createNewUser(User user){
+        System.out.println("hello");
         userRepo.save(user);
     }
 

@@ -49,15 +49,14 @@ public class AdminPanelController {
         model.addAttribute("statisticPage", Boolean.FALSE);
         return "adminCabinetEdit";
     }
-
-    //U need the "add user" functional here
     @PostMapping("/adminCabinetEdit/edit")
     @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     public String addNewUser(@RequestParam String name,
                                         @RequestParam String password, @RequestParam String  role) {
-        System.out.println(name + password + role);
-
-        return "adminCabinetEdit";
+        User user = new User(null, name, password, role);
+        System.out.println(user.toString());
+        userService.createNewUser(user);
+        return "adminCabinetEdit"; //return statement here is broken. Try to use redirect
     }
 
 

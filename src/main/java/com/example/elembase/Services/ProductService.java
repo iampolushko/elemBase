@@ -2,9 +2,8 @@ package com.example.elembase.Services;
 
 import com.example.elembase.Entitity.Product;
 import com.example.elembase.repository.ProductRepo;
-import jakarta.persistence.Column;
-import jakarta.persistence.GeneratedValue;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.config.annotation.web.configurers.AbstractAuthenticationFilterConfigurer;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -23,7 +22,7 @@ public class ProductService {
 
         List<Product> allProducts = productRepo.findAll();
         List<String> productsNames = new ArrayList<>();
-
+        //TODO You should optimize that with product repo method
         for (int x = 0; x < allProducts.size(); x++) {
             Product product = allProducts.get(x);
             String productName = product.getProductId() + product.getSeries() + product.getChipDimensionsLxW()
@@ -36,6 +35,30 @@ public class ProductService {
         return productsNames;
     }
 
+    public HashMap<String, List<String>> getAllProductsStatsByNames(){
+        HashMap<String, List<String>> statsByNames = new HashMap<>();
+        List<String> l = productRepo.getAllL();
+        List<String> w = productRepo.getAllW();
+        List<String> operatingTempRange = productRepo.getAllOperating_temp_range();
+        List<String> ratedVoltageVDC = productRepo.getAllRated_voltage_vdc();
+        List<String> tcCode = productRepo.getAllTc_code();
+        List<String> cap = productRepo.getAllCap();
+        List<String> tol = productRepo.getAllTol();
+
+        List<String> names = getAllProductsNames();
+
+
+        for (int tick = 0; tick < names.size(); tick++) {
+                statsByNames.put(names.get(tick), Arrays.asList(l.get(tick), w.get(tick), operatingTempRange.get(tick),
+                        ratedVoltageVDC.get(tick), tcCode.get(tick), cap.get(tick), tol.get(tick)));
+        }
+        return statsByNames;
+    }
+
+    public List<String> getProductStatsNames() {
+        return Arrays.asList("l", "w", "operatingTempRange", "ratedVoltageVDC", "tcCode", "cap", "tol");
+    }
+
     public List<String> getProductsCategoryNames() {
         return Arrays.asList("l", "w", "operatingTempRange", "ratedVoltageVDC", "tcCode",
                 "cap", "tol", "productId", "series", "chipDimensionsLxW", "heightDimensionT", "temperatureCharacteristics",
@@ -45,6 +68,7 @@ public class ProductService {
     public HashMap<String, List<String>> getHashFilters() {
         HashMap<String, List<String>> hashFilters = new HashMap<>();
         List<Product> allProducts = productRepo.findAll();
+        //replace this arrays.as list to call method getProductsCategoryNames
         List<String> productsCategoryNames = Arrays.asList("l", "w", "operatingTempRange", "ratedVoltageVDC", "tcCode",
                 "cap", "tol", "productId", "series", "chipDimensionsLxW", "heightDimensionT", "temperatureCharacteristics",
                 "ratedVoltageH", "capacitance", "capacitanceTolerance", "individualSpecificationCodeOrLLR", "packing");
@@ -98,5 +122,21 @@ public class ProductService {
         return hashFilters;
 
     }
+
+    //Что-то в этой хуйне пошло не так
+    public List<String> getFilteredProductsNames(ArrayList<String> filterParams){
+        List<String> filteredProductsNames = new ArrayList<>();
+
+//        for (Product product : productRepo.findAll()) {
+//            if (product.getL() == filterParams)
+//        }
+
+
+
+
+        return filteredProductsNames;
+    }
+
+
 
 }

@@ -6,6 +6,10 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Arrays;
+import java.util.List;
+import java.util.Objects;
+
 @Entity
 @Data
 @Table(name = "product")
@@ -68,6 +72,21 @@ public class Product {
 
     @Column(name = "packing")
     private String packing;
+
+    public String getByName(String columnName){
+        List<String> productsCategoryNames = Arrays.asList("l", "w", "operatingTempRange", "ratedVoltageVDC", "tcCode",
+                "cap", "tol", "productId", "series", "chipDimensionsLxW", "heightDimensionT", "temperatureCharacteristics",
+                "ratedVoltageH", "capacitance", "capacitanceTolerance", "individualSpecificationCodeOrLLR", "packing");
+
+        String returnedValue = "";
+        for (String productsCategoryName : productsCategoryNames) {
+            if (Objects.equals(productsCategoryName, columnName)) {
+                returnedValue = columnName;
+                break;
+            }
+        }
+        return returnedValue;
+    }
 
 
 }

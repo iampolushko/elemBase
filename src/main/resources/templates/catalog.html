@@ -14,19 +14,20 @@
 
 
 <div class="catalog-main-div">
-    <form th:action="catalogFiltered" th:method="post" th:object="${filter}" action="catalog/useFilter" class="catalog-main-div-filters">
+    <form action="catalog/useFilter" method="post" class="catalog-main-div-filters">
         <div th:each="product : ${products}">
             <details>
                 <summary th:text="${product}"></summary>
+                <input type="radio" id="id_outside" th:name="${product}" th:value="none" checked="checked">
+                <label th:text="none" for="id_outside"></label><br>
                 <div th:each="filter : ${hashFilters.get(product)}">
-                    <input type="radio" id="id" name="1" value="1">
+                    <input type="radio" id="id" th:name="${product}" th:value="${filter}">
                     <label th:text="${filter}" for="id"></label><br>
                 </div>
             </details>
         </div>
         <div class="catalog-main-div-filters-buttons">
-            <button class="catalog-main-div-filters-button"> Применить </button>
-            <button class="catalog-main-div-filters-button"> Сбросить </button>
+            <button class="catalog-main-div-filters-button" type="submit" > Применить </button>
         </div>
     </form>
 
@@ -35,11 +36,15 @@
 
     <div class="catalog-main-div-products">
         <nav class="catalog-main-div-products-nav">
-            <ul class="catalog-main-div-products-nav-ul">
-                <div th:each="allProductName : ${allProductsNames}">
-                    <button type="button" class="list-group-item list-group-item-action" th:text="${allProductName}"></button>
-                </div>
-            </ul>
+            <form action="catalog/loadProductDescription" method="post">
+                <ul class="catalog-main-div-products-nav-ul">
+                    <div th:each="allProductName : ${allProductsNames}">
+                        <button type="submit" class="list-group-item list-group-item-action" th:text="${allProductName}"
+                        th:name="productName" th:value="${allProductName}" ></button>
+                    </div>
+                </ul>
+            </form>
+
         </nav>
 
     </div>
@@ -48,48 +53,27 @@
     <div class="card catalog-main-div-card">
         <img th:src="@{/images/transister.svg}" class="card-img-top" alt="image">
         <div class="card-body">
-            <h5 class="card-title">Название детали</h5>
-            <p class="card-text">Очень краткое описание</p>
+            <h5 class="card-title" th:text="${productCardName}"></h5>
+            <p class="card-text">Chip Multilayer Ceramic Capacitors
+                for General</p>
+            <div style="display: flex">
+                <table class="catalog-main-div-card-table">
+                    <div th:each="productStatName : ${productStatsNames}">
+                        <tr class="catalog-main-div-card-table-tr">
+                            <th class="catalog-main-div-card-table-th" th:text="${productStatName}">
+                        </tr>
+                    </div>
+                </table>
+                <table class="catalog-main-div-card-table">
+                    <div th:each="productStat : ${productStats}">
+                        <tr class="catalog-main-div-card-table-tr">
+                            <th class="catalog-main-div-card-table-th" th:text="${productStat}">
+                        </tr>
+                    </div>
+                </table>
+            </div>
 
-            <table class="catalog-main-div-card-table">
-                <tr class="catalog-main-div-card-table-tr">
-                    <th class="catalog-main-div-card-table-th">
-                        1
-                    </th>
-                    <th class="catalog-main-div-card-table-th">
-                        1
-                    </th>
-                </tr>
-                <tr class="catalog-main-div-card-table-tr">
-                    <th class="catalog-main-div-card-table-th">
-                        2
-                    </th>
-                    <th class="catalog-main-div-card-table-th">
-                        2
-                    </th>
-                </tr>
-                <tr class="catalog-main-div-card-table-tr">
-                    <th class="catalog-main-div-card-table-th">
-                        3
-                    </th>
-                    <th class="catalog-main-div-card-table-th">
-                        3
-                    </th>
-                </tr>
 
-            </table>
-
-            <form action="catalog/addToOrder" method="post">
-                <div>
-                    <label>First Name</label>
-                    <input type="text" name="firstName" placeholder="Enter your first name"/>
-                </div>
-                <div>
-                    <label>Last Name</label>
-                    <input type="text" name="lastName" placeholder="Enter your last name"/>
-                </div>
-                <button>Submit</button>
-            </form>
             <a href="#" class="btn btn-primary">Добавить в заказ</a>
             <a href="#" class="btn btn-primary">Подробнее</a>
         </div>

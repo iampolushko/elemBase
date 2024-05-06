@@ -56,7 +56,7 @@ public class AdminPanelController {
         User user = new User(null, name, password, role);
         System.out.println(user.toString());
         userService.createNewUser(user);
-        return "adminCabinetEdit"; //return statement here is broken. Try to use redirect
+        return "redirect:/elemBase/adminCabinetEdit";
     }
 
 

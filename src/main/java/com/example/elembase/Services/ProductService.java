@@ -125,14 +125,19 @@ public class ProductService {
 
     //Что-то в этой хуйне пошло не так
     public List<String> getFilteredProductsNames(ArrayList<String> filterParams){
-        List<String> filteredProductsNames = new ArrayList<>();
+        List<Product> filteredProducts = productRepo.getFilteredProducts(filterParams.get(0), filterParams.get(1),
+                filterParams.get(2), filterParams.get(3), filterParams.get(4), filterParams.get(5), filterParams.get(6),
+                filterParams.get(7), filterParams.get(8), filterParams.get(9), filterParams.get(10), filterParams.get(11),
+                filterParams.get(12), filterParams.get(13), filterParams.get(14), filterParams.get(15), filterParams.get(16));
 
-//        for (Product product : productRepo.findAll()) {
-//            if (product.getL() == filterParams)
-//        }
+        List<String > filteredProductsNames = new ArrayList<>();
 
-
-
+        for (Product product : filteredProducts) {
+            filteredProductsNames.add(product.getProductId() + product.getSeries() + product.getChipDimensionsLxW()
+                    + product.getHeightDimensionT() + product.getTemperatureCharacteristics() + product.getRatedVoltageH()
+                    + product.getCapacitance() + product.getCapacitanceTolerance() + product.getIndividualSpecificationCodeOrLLR()
+                    + product.getPacking());
+        }
 
         return filteredProductsNames;
     }

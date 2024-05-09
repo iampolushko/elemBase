@@ -73,19 +73,44 @@ public class Product {
     @Column(name = "packing")
     private String packing;
 
-    public String getByName(String columnName){
-        List<String> productsCategoryNames = Arrays.asList("l", "w", "operatingTempRange", "ratedVoltageVDC", "tcCode",
-                "cap", "tol", "productId", "series", "chipDimensionsLxW", "heightDimensionT", "temperatureCharacteristics",
-                "ratedVoltageH", "capacitance", "capacitanceTolerance", "individualSpecificationCodeOrLLR", "packing");
-
-        String returnedValue = "";
-        for (String productsCategoryName : productsCategoryNames) {
-            if (Objects.equals(productsCategoryName, columnName)) {
-                returnedValue = columnName;
-                break;
-            }
+    public String getColumnByNumber(Integer tick){
+        if (tick == 0){
+            return getL();
+        } else if (tick == 1) {
+            return getW();
+        } else if (tick == 2) {
+            return getOperatingTempRange();
+        }else if (tick == 3) {
+            return getRatedVoltageVDC();
+        }else if (tick == 4) {
+            return getTcCode();
+        }else if (tick == 5) {
+            return getCap();
+        }else if (tick == 6) {
+            return getTol();
+        }else if (tick == 7) {
+            return getProductId();
+        }else if (tick == 8) {
+            return getSeries();
+        }else if (tick == 9) {
+            return getChipDimensionsLxW();
+        }else if (tick == 10) {
+            return getHeightDimensionT();
+        }else if (tick == 11) {
+            return getTemperatureCharacteristics();
+        }else if (tick == 12) {
+            return getRatedVoltageH();
+        }else if (tick == 13) {
+            return getCapacitance();
+        }else if (tick == 14) {
+            return getCapacitanceTolerance();
+        }else if (tick == 15) {
+            return getIndividualSpecificationCodeOrLLR();
+        }else if (tick == 16) {
+            return getPacking();
+        } else {
+            return "no column";
         }
-        return returnedValue;
     }
 
 

@@ -49,7 +49,8 @@ public class SecurityConfig {
                         .requestMatchers("elemBase/catalog/useFilter").permitAll()
                         .requestMatchers("elemBase/catalog/loadProductDescription").permitAll()
                         .requestMatchers("elemBase/**").authenticated()
-                        .requestMatchers("elemBase/adminCabinetEdit/edit").authenticated())
+                        .requestMatchers("elemBase/adminCabinetEdit/edit").authenticated()
+                        .requestMatchers("elemBase/catalog/addToOrder").authenticated())
                 .formLogin(AbstractAuthenticationFilterConfigurer::permitAll)
                 .build();
     }

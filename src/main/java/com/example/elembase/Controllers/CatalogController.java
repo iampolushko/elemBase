@@ -128,8 +128,9 @@ public class CatalogController {
         MyUserDetails myUserDetails = (MyUserDetails)principal;
         Long part_id = productService.getIdByName(choosenProductName);
         Long user_id = myUserDetails.getUserId();
-        Order order = new Order(null, part_id, user_id);
-        orderService.createNewOrder(order);
+        System.out.println(part_id);
+        System.out.println(user_id);
+        orderService.createNewOrder(part_id, user_id);
         return "redirect:/elemBase/catalog";
     }
 

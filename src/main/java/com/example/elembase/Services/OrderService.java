@@ -13,8 +13,8 @@ public class OrderService {
     @Autowired
     private OrderRepo orderRepo;
 
-    public void createNewOrder(Order order) {
-        orderRepo.save(order);
+    public void createNewOrder(Long id_product, Long id_user) {
+        orderRepo.saveOrder(id_product, id_user);
     }
 
     public List<Long> getProductsId(Long userId) {
@@ -22,7 +22,6 @@ public class OrderService {
     }
 
     public List<Order> getAllOrders() {
-//        return orderRepo.findAll();
         return orderRepo.getAllOrders();
     }
 

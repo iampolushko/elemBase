@@ -16,11 +16,11 @@ public class Order {
     @GeneratedValue
     private Long id;
 
-    @Column(name = "idProduct")
+    @Column(name = "id_product")
     private Long idProduct;
 
-    @Column(name = "idUser")
+    @Column(name = "id_user")
     private Long idUser;
 
-
+    //TODO You are need the status column
 }

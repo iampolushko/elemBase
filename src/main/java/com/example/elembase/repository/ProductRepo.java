@@ -26,15 +26,17 @@ public interface ProductRepo extends JpaRepository<Product, Long> {
             "    if(?14 != 'none', ?14, capacitance) = capacitance and" +
             "    if(?15 != 'none', ?15, capacitance_tolerance) = capacitance_tolerance and" +
             "    if(?16 != 'none', ?16, individual_specification_code_or_llr) = individual_specification_code_or_llr and" +
-            "    if(?17 != 'none', ?17, packing) = packing" , nativeQuery = true)
+            "    if(?17 != 'none', ?17, packing) = packing", nativeQuery = true)
     List<Product> getFilteredProducts(String l, String w, String operating_temp_range, String rated_voltage_vdc,
                                      String tc_code, String cap, String tol, String product_id, String series,
                                      String chip_dimensions_lxw, String height_dimension_t, String temperature_characteristics,
                                      String rated_voltage_h, String capacitance, String capacitance_tolerance,
                                      String individual_specification_code_or_llr, String packing);
 
-//    @Query(value = "select id from product WHERE l = ?1 and w =?2 and operating_temp_range = ?3 and rated_voltage_vdc = ?4 and tc_code = ?5 and cap = ?6 and tol = ?7 and product_id = ?8 and series = ?9 and chip_dimensions_lxw", nativeQuery = true)
-//    List<Product> findAllByL(String l, String w);
+    @Query(value = "select id from product WHERE " +
+            "l = ?1 and w =?2 and operating_temp_range = ?3 and rated_voltage_vdc = ?4 and tc_code = ?5 and cap = ?6" +
+            " and tol = ?7 and product_id = ?8 and series = ?9 and chip_dimensions_lxw = ?10", nativeQuery = true)
+    List<Product> findAllByL(String l, String w);
 
     @Query(value = "select l from product", nativeQuery = true)
     List<String> getAllL();
@@ -56,6 +58,9 @@ public interface ProductRepo extends JpaRepository<Product, Long> {
 
     @Query(value = "select tol from product", nativeQuery = true)
     List<String> getAllTol();
+
+    @Query(value = "select * from product where id = ?1", nativeQuery = true)
+    List<Product> getByiD(Long productId);
 
 
 }

@@ -8,7 +8,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.*;
 import java.util.stream.Collectors;
-
+//TODO У тебя в основном доступ осуществляется по имени элемента, из за чегу у теба много ненужных методов.
+//Проблема заключается в том, что ты делегировал логику вывода в сервис. Не надо так.
 @Service
 public class ProductService {
     @Autowired
@@ -31,9 +32,10 @@ public class ProductService {
                     + product.getPacking();
             productsNames.add(productName);
         }
-
         return productsNames;
     }
+
+
 
     public HashMap<String, List<String>> getAllProductsStatsByNames(){
         HashMap<String, List<String>> statsByNames = new HashMap<>();
@@ -123,7 +125,6 @@ public class ProductService {
 
     }
 
-    //Что-то в этой хуйне пошло не так
     public List<String> getFilteredProductsNames(ArrayList<String> filterParams){
         List<Product> filteredProducts = productRepo.getFilteredProducts(filterParams.get(0), filterParams.get(1),
                 filterParams.get(2), filterParams.get(3), filterParams.get(4), filterParams.get(5), filterParams.get(6),
@@ -141,6 +142,26 @@ public class ProductService {
 
         return filteredProductsNames;
     }
+
+    public Long getIdByName(String productName) {
+        HashMap<String, Long> idByName = new HashMap<>();
+        List<String> allProductsNames = getAllProductsNames();
+        List<Product> allProducts = productRepo.findAll();
+        for (int x = 0; x < allProducts.size(); x++) {
+            idByName.put(allProductsNames.get(x), allProducts.get(x).getId());
+        }
+        return idByName.get(productName);
+    }
+
+    public String getNameById(Long productId) {
+        Product product = productRepo.getByiD(productId).get(0);
+        return product.getProductId() + product.getSeries() + product.getChipDimensionsLxW()
+                + product.getHeightDimensionT() + product.getTemperatureCharacteristics() + product.getRatedVoltageH()
+                + product.getCapacitance() + product.getCapacitanceTolerance() + product.getIndividualSpecificationCodeOrLLR()
+                + product.getPacking();
+    }
+
+
 
 
 

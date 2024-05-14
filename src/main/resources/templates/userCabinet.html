@@ -16,8 +16,8 @@
     <div class="media align-items-center py-3 mb-3">
         <img src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="" class="d-block ui-w-100 rounded-circle">
         <div class="media-body ml-4">
-            <h4 class="font-weight-bold mb-0">John Doe <span class="text-muted font-weight-normal">@johndoe</span></h4>
-            <div class="text-muted mb-2">ID: 3425433</div>
+            <h4 class="font-weight-bold mb-0" th:text="${name}"> <span class="text-muted font-weight-normal">@johndoe</span></h4>
+            <div class="text-muted mb-2 make-horizontal"><div>ID:</div> <div th:text="${id}"></div></div>
         </div>
     </div>
 
@@ -26,24 +26,12 @@
             <table class="table user-view-table m-0">
                 <tbody>
                 <tr>
-                    <td>Registered:</td>
-                    <td>01/23/2017</td>
-                </tr>
-                <tr>
-                    <td>Latest activity:</td>
-                    <td>01/23/2018 (14 days ago)</td>
-                </tr>
-                <tr>
-                    <td>Verified:</td>
-                    <td><span class="fa fa-check text-primary"></span>&nbsp; Yes</td>
-                </tr>
-                <tr>
                     <td>Role:</td>
                     <td>User</td>
                 </tr>
                 <tr>
                     <td>Status:</td>
-                    <td><span class="badge badge-outline-success">Active</span></td>
+                    <td>Active</td>
                 </tr>
                 </tbody>
             </table>
@@ -74,8 +62,9 @@
             </div>
             <hr class="border-light m-0">
             <div class="card-body">
-
-                <h1>something</h1>
+                <div th:each="userOrderName : ${userOrdersNames}">
+                    <div th:text="${userOrderName}"></div>
+                </div>
 
             </div>
         </div>

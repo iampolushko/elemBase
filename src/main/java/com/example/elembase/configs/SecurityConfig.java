@@ -45,12 +45,11 @@ public class SecurityConfig {
                         .requestMatchers("/resources/**").permitAll()
                         .requestMatchers("elemBase/catalog").permitAll()
                         .requestMatchers("elemBase/catalogFiltered").permitAll()
-                        .requestMatchers("elemBase/catalog/addToOrder").permitAll()
                         .requestMatchers("elemBase/catalog/useFilter").permitAll()
                         .requestMatchers("elemBase/catalog/loadProductDescription").permitAll()
+                        .requestMatchers("elemBase/catalog/addToOrder").permitAll()
                         .requestMatchers("elemBase/**").authenticated()
-                        .requestMatchers("elemBase/adminCabinetEdit/edit").authenticated()
-                        .requestMatchers("elemBase/catalog/addToOrder").authenticated())
+                        .requestMatchers("elemBase/adminCabinetEdit/edit").authenticated())
                 .formLogin(AbstractAuthenticationFilterConfigurer::permitAll)
                 .build();
     }

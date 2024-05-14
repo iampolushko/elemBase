@@ -21,6 +21,24 @@
                 </div>
                 <div>
                     Данные
+                    <table>
+                        <tr>
+                            <th>Всего деталей:</th>
+                            <th th:text="${productsQuantity}"></th>
+                        </tr>
+                        <tr>
+                            <th>Всего пользователей:</th>
+                            <th th:text="${usersQuantity}"></th>
+                        </tr>
+                        <tr>
+                            <th>Всего запросов: </th>
+                            <th th:text="${ordersQuantity}"></th>
+                        </tr>
+                        <tr>
+                            <th>Деталей выдано:</th>
+                            <th>0</th>
+                        </tr>
+                    </table>
                 </div>
             </div>
 

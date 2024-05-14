@@ -2,20 +2,23 @@ package com.example.elembase.Controllers;
 
 
 import com.example.elembase.Entitity.Filter;
+import com.example.elembase.Entitity.Order;
 import com.example.elembase.Entitity.Product;
+import com.example.elembase.Services.OrderService;
 import com.example.elembase.Services.ProductService;
 
+import com.example.elembase.configs.MyUserDetails;
 import com.example.elembase.repository.ProductRepo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
 
 @Controller
@@ -28,11 +31,14 @@ public class CatalogController {
     private String choosenProductName = "";
     private boolean filterOn = false;
     private ArrayList<String> filterParams;
+    private Boolean userAuthenticated = false;
+    private OrderService orderService;
 
     @Autowired
-    public CatalogController(ProductService productService, ProductRepo productRepo) {
+    public CatalogController(ProductService productService, ProductRepo productRepo, OrderService orderService) {
         this.productService = productService;
         this.productRepo = productRepo;
+        this.orderService = orderService;
     }
 
 
@@ -67,12 +73,26 @@ public class CatalogController {
             model.addAttribute("productStats", statsByNames.get(choosenProductName));
             System.out.println("Loading product card");
         }
+        try{
+            Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+            MyUserDetails myUserDetails = (MyUserDetails)principal;
+            if (Objects.equals(myUserDetails.getUserRole(), "ROLE_USER")){
+                userAuthenticated = true;
+            } else {
+                userAuthenticated = false;
+            }
+        } catch (Exception e) {
+            userAuthenticated = false;
+        }
+
+
+        model.addAttribute("userAuthenticated", userAuthenticated);
+
 
         return "catalog";
     }
 
 
-    //TODO This shit heave infinite load with strange artifacts. Fix this.
     @PostMapping("/catalog/useFilter")
     public String catalogFiltered(@RequestParam String l, @RequestParam String w, @RequestParam String operatingTempRange,
                                   @RequestParam String ratedVoltageVDC, @RequestParam String tcCode, @RequestParam String cap,
@@ -101,11 +121,15 @@ public class CatalogController {
         return "redirect:/elemBase/catalog";
     }
 
-    //TODO Here we need the functional
+    //TODO It is just doesn't work
     @PostMapping("/catalog/addToOrder")
-    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     public String addToCart(){
-        System.out.println("test");
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        MyUserDetails myUserDetails = (MyUserDetails)principal;
+        Long part_id = productService.getIdByName(choosenProductName);
+        Long user_id = myUserDetails.getUserId();
+        Order order = new Order(null, part_id, user_id);
+        orderService.createNewOrder(order);
         return "redirect:/elemBase/catalog";
     }
 

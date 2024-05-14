@@ -22,8 +22,6 @@
                     </div>
                 </ul>
             </nav>
-
-
         </div>
         <hr class="border-light m-0">
 
@@ -41,6 +39,16 @@
 
         <div class="card-body">
             <h3>Заказы</h3>
+            <nav class="adminCabinet-main-div-products-nav">
+                <ul class="adminCabinet-main-div-products-nav-ul">
+                    <div th:each="orderOutput : ${ordersOutputs}">
+                        <div>
+                            <button type="button" class="list-group-item list-group-item-action" th:text="${orderOutput}"></button>
+                        </div>
+
+                    </div>
+                </ul>
+            </nav>
         </div>
         <hr class="border-light m-0">
 

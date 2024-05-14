@@ -72,10 +72,17 @@
                     </div>
                 </table>
             </div>
+            <div th:if="${userAuthenticated}">
+                <form action="catalog/addToOrder" method="post">
+                    <button type="submit" class="btn btn-primary">Добавить в заказ</button>
+                </form>
+            </div>
+            <div th:unless="${userAuthenticated}">
+                <button type="button" class="btn btn-lg btn-primary" disabled>Добавить в заказ</button>
+                <h4>Сначала авторизуйтесь</h4>
 
-            <form action="catalog/addToOrder" method="post">
-                <button type="submit" href="#" class="btn btn-primary">Добавить в заказ</button>
-            </form>
+            </div>
+
             <a href="https://www.murata.com/~/media/webrenewal/support/library/catalog/products/k70e.ashx" class="btn btn-primary">Подробнее</a>
         </div>
     </div>

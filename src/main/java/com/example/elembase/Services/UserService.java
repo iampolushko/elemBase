@@ -14,6 +14,7 @@ public class UserService {
     @Autowired
     private UserRepo userRepo;
 
+
     public List<String> getAllUsersNames(){
         List<User> users = userRepo.findAll();
         List<String> usersNames = new ArrayList<>();
@@ -23,9 +24,22 @@ public class UserService {
         return usersNames;
     }
 
+    public List<Long> getAllUsersIds(){
+        List<User> users = userRepo.findAll();
+        List<Long> usersIds = new ArrayList<>();
+        for (User user : users) {
+            usersIds.add(user.getId());
+        }
+        return usersIds;
+    }
+
     public void createNewUser(User user){
-        System.out.println("hello");
+        System.out.println("userCreated");
         userRepo.save(user);
     }
+
+//    public String getUserName(){
+//        return ;
+//    }
 
 }

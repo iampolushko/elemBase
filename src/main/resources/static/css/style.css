@@ -107,6 +107,10 @@ body{
 .text-xlarge {
     font-size: 170% !important;
 }
+
+.make-horizontal{
+    display: flex;
+}
 /*userCabinet*/
 
 /*adminCabinet*/

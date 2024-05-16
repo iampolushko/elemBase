@@ -22,5 +22,6 @@ public class Order {
     @Column(name = "id_user")
     private Long idUser;
 
-    //TODO You are need the status column
+    @Column(name = "status")
+    private Long status;
 }

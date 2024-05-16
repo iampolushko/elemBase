@@ -8,6 +8,7 @@ import com.example.elembase.Services.ProductService;
 import com.example.elembase.Services.UserService;
 import com.example.elembase.configs.MyUserDetails;
 import com.example.elembase.repository.OrderRepo;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
@@ -16,6 +17,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.ArrayList;
@@ -54,8 +56,20 @@ public class UserCabinetController {
         model.addAttribute("userOrdersNames", userOrdersNames);
 
 
-
         return "userCabinet";
     }
+
+
+    @PostMapping("/userCabinet/logout")
+    @PreAuthorize("hasAuthority('ROLE_USER')")
+    public String logout(HttpServletRequest request) {
+        System.out.println("Test");
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication != null) {
+            request.getSession().invalidate();
+        }
+        return "redirect:/elemBase/catalog";
+    }
+
 
 }

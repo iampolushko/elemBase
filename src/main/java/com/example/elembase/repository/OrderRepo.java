@@ -17,9 +17,17 @@ public interface OrderRepo extends JpaRepository<Order, Long> {
     @Query(value = "select * from diplom.order", nativeQuery = true)
     List<Order> getAllOrders();
 
+    @Query(value = "select * from diplom.order where id=?1", nativeQuery = true)
+    Order getOrderById(Long userId);
+
     @Modifying
-    @Query(value = "INSERT INTO `diplom`.`order` (`id_product`, `id_user`) VALUES (:id_product,:id_user)", nativeQuery = true)
+    @Query(value = "INSERT INTO `diplom`.`order` (`id_product`, `id_user`, `status`) VALUES (:id_product,:id_user,:status)", nativeQuery = true)
     @Transactional
-    void saveOrder(@Param("id_product") Long id_product, @Param("id_user") Long id_user);
+    void saveOrder(@Param("id_product") Long id_product, @Param("id_user") Long id_user, @Param("status") Long status);
+
+    @Modifying
+    @Query(value = "UPDATE `diplom`.`order` SET `status` = :status WHERE (`id` = :id);", nativeQuery = true)
+    @Transactional
+    void editOrderStatus(@Param("status") Long status, @Param("id") Long id);
 
 }

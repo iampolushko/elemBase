@@ -19,6 +19,9 @@
             <h4 class="font-weight-bold mb-0" th:text="${name}"> <span class="text-muted font-weight-normal">@johndoe</span></h4>
             <div class="text-muted mb-2 make-horizontal"><div>ID:</div> <div th:text="${id}"></div></div>
         </div>
+        <form method="post" action="userCabinet/logout">
+            <button type="submit">Logout</button>
+        </form>
     </div>
 
     <div class="card mb-4">

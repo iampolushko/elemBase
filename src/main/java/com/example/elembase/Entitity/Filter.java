@@ -4,21 +4,21 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 public class Filter {
 
-     String l;
-     String w;
-     String operatingTempRange;
-     String ratedVoltageVDC;
-     String tcCode;
-     String cap;
-     String tol;
-     String productId;
-     String series;
-     String chipDimensionsLxW;
-     String heightDimensionT;
-     String temperatureCharacteristics;
-     String ratedVoltageH;
-     String capacitance;
-     String capacitanceTolerance;
-     String individualSpecificationCodeOrLLR;
-     String packing;
+     private String l;
+     private String w;
+     private String operatingTempRange;
+     private String ratedVoltageVDC;
+     private String tcCode;
+     private String cap;
+     private String tol;
+     private String productId;
+     private String series;
+     private String chipDimensionsLxW;
+     private String heightDimensionT;
+     private String temperatureCharacteristics;
+     private String ratedVoltageH;
+     private String capacitance;
+     private String capacitanceTolerance;
+     private String individualSpecificationCodeOrLLR;
+     private String packing;
 }

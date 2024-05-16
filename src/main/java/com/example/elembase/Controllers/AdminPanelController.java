@@ -56,6 +56,9 @@ public class AdminPanelController {
     @GetMapping("/adminCabinetEdit")
     @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     public String pageForAdminCabinetEdit(Model model) {
+        List<Order> orders = orderService.getAllOrders();
+        model.addAttribute("orders", orders);
+        model.addAttribute("productService", productService);
         model.addAttribute("listsPage", Boolean.FALSE);
         model.addAttribute("editPage", Boolean.TRUE);
         model.addAttribute("statisticPage", Boolean.FALSE);
@@ -68,6 +71,18 @@ public class AdminPanelController {
         User user = new User(null, name, password, role);
         System.out.println(user.toString());
         userService.createNewUser(user);
+        return "redirect:/elemBase/adminCabinetEdit";
+    }
+
+    @PostMapping("/adminCabinetEdit/editOrderStatus")
+    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
+    public String editOrderStatus(@RequestParam Long orderId) {
+        if (orderService.getOrderById(orderId).getStatus() == 0L) {
+            orderService.updateStatus(1L, orderId);
+        } else {
+            orderService.updateStatus(0L, orderId);
+        }
+
         return "redirect:/elemBase/adminCabinetEdit";
     }
 

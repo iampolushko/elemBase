@@ -51,7 +51,6 @@ public class CatalogController {
 
     @GetMapping("/catalog")
     public String pageForAll(Model model) {
-        HashMap<String, List<String>> hashFilters = productService.getHashFilters();
         Iterable<String> products = productService.getProductsCategoryNames();
         model.addAttribute("products", products);
         if (!filterOn){
@@ -62,6 +61,7 @@ public class CatalogController {
             model.addAttribute("allProductsNames", filteredProducts);
         }
 
+        HashMap<String, List<String>> hashFilters = productService.getHashFilters();
         model.addAttribute("hashFilters", hashFilters);
         model.addAttribute("filter", new Filter());
         if (choosenProductName.isEmpty()) {
@@ -130,7 +130,7 @@ public class CatalogController {
         Long user_id = myUserDetails.getUserId();
         System.out.println(part_id);
         System.out.println(user_id);
-        orderService.createNewOrder(part_id, user_id);
+        orderService.createNewOrder(part_id, user_id, 0L); //0 - is "order are made" status
         return "redirect:/elemBase/catalog";
     }
 

@@ -25,7 +25,19 @@
                 <input type="text" name="role" placeholder="role"/><br/>
                 <button type="submit">Добавить</button>
             </form>
-
+        </div>
+    </div>
+    <div class="card mb-4">
+        <div class="card-body">
+            <nav class="adminCabinet-main-div-products-nav">
+                <ul class="adminCabinet-main-div-products-nav-ul">
+                    <div th:each="order : ${orders}">
+                        <form method="post" action="adminCabinetEdit/editOrderStatus">
+                            <button class="list-group-item list-group-item-action" name="orderId" th:value="${order.getId()}" th:text="${productService.getNameById(order.getIdProduct())} + '  Status:' + ${order.getStatus()}" type="submit"></button>
+                        </form>
+                    </div>
+                </ul>
+            </nav>
 
         </div>
     </div>

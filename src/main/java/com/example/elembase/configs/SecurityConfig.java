@@ -17,6 +17,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.logout.HeaderWriterLogoutHandler;
+import org.springframework.security.web.header.writers.ClearSiteDataHeaderWriter;
 
 
 @Configuration
@@ -49,7 +51,9 @@ public class SecurityConfig {
                         .requestMatchers("elemBase/catalog/loadProductDescription").permitAll()
                         .requestMatchers("elemBase/catalog/addToOrder").permitAll()
                         .requestMatchers("elemBase/**").authenticated()
-                        .requestMatchers("elemBase/adminCabinetEdit/edit").authenticated())
+                        .requestMatchers("elemBase/adminCabinetEdit/edit").authenticated()
+                        .requestMatchers("elemBase/adminCabinetEdit/editOrderStatus").authenticated()
+                        .requestMatchers("elemBase/userCabinet/logout").authenticated())
                 .formLogin(AbstractAuthenticationFilterConfigurer::permitAll)
                 .build();
     }

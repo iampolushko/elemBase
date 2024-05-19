@@ -9,7 +9,7 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.example</groupId>
-    <artifactId>elemBase</artifactId>
+    <artifactId>elembase</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>elemBase</name>
     <description>elemBase</description>
@@ -94,6 +94,7 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
         </plugins>
+        <finalName>elembasecontainer</finalName>
     </build>
 
 </project>

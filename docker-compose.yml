@@ -1,0 +1,32 @@
+version: "3"
+services:
+  elembaseapp:
+    image: elembasecontainer
+    container_name: elembasecontainer
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "9090:8080"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysqlelembase:3306/diplom?useSSL=false
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: root
+    depends_on:
+      - mysqlelembase
+
+  mysqlelembase:
+    image: mysql:latest
+    container_name: mysqlelembase
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=diplom
+
+    ports:
+      - "3308:3306"
+    volumes:
+      - elembasesqlvolume:/var/lib/mysql/
+
+
+volumes:
+  elembasesqlvolume:

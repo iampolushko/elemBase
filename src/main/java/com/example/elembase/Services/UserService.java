@@ -33,9 +33,9 @@ public class UserService {
         return usersIds;
     }
 
-    public void createNewUser(User user){
+    public void createNewUser(String name, String password,String role){
         System.out.println("userCreated");
-        userRepo.save(user);
+        userRepo.createNewUser(name, password, role);
     }
 
 //    public String getUserName(){

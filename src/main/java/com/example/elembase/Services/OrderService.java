@@ -14,8 +14,8 @@ public class OrderService {
     @Autowired
     private OrderRepo orderRepo;
 
-    public void createNewOrder(Long id_product, Long id_user, Long status) {
-        orderRepo.saveOrder(id_product, id_user, status);
+    public void createNewOrder(Long id_product, Long id_user) {
+        orderRepo.saveOrder(id_product, id_user);
     }
 
     public List<Long> getProductsId(Long userId) {

@@ -21,9 +21,9 @@ public interface OrderRepo extends JpaRepository<Order, Long> {
     Order getOrderById(Long userId);
 
     @Modifying
-    @Query(value = "INSERT INTO `diplom`.`order` (`id_product`, `id_user`, `status`) VALUES (:id_product,:id_user,:status)", nativeQuery = true)
+    @Query(value = "INSERT INTO `diplom`.`order` (`id_product`, `id_user`) VALUES (:id_product, :id_user)", nativeQuery = true)
     @Transactional
-    void saveOrder(@Param("id_product") Long id_product, @Param("id_user") Long id_user, @Param("status") Long status);
+    void saveOrder(@Param("id_product") Long id_product, @Param("id_user") Long id_user);
 
     @Modifying
     @Query(value = "UPDATE `diplom`.`order` SET `status` = :status WHERE (`id` = :id);", nativeQuery = true)

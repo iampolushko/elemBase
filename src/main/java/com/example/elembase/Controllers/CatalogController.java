@@ -130,7 +130,7 @@ public class CatalogController {
         Long user_id = myUserDetails.getUserId();
         System.out.println(part_id);
         System.out.println(user_id);
-        orderService.createNewOrder(part_id, user_id, 0L); //0 - is "order are made" status
+        orderService.createNewOrder(part_id, user_id); //0 - is "order are made" status
         return "redirect:/elemBase/catalog";
     }
 

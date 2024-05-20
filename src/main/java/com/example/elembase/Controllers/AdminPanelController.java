@@ -68,9 +68,8 @@ public class AdminPanelController {
     @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     public String addNewUser(@RequestParam String name,
                                         @RequestParam String password, @RequestParam String  role) {
-        User user = new User(null, name, password, role);
-        System.out.println(user.toString());
-        userService.createNewUser(user);
+        //TODO You need to encrypt the password
+        userService.createNewUser(name, password, role);
         return "redirect:/elemBase/adminCabinetEdit";
     }
 

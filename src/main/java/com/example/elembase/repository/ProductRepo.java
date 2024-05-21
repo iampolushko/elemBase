@@ -9,6 +9,8 @@ import java.util.List;
 public interface ProductRepo extends JpaRepository<Product, Long> {
 
     String filterQueryText = "";
+    //TODO You should try the pagination functional
+    // PagingAndSortingRepository
     @Query(value = "select * from diplom.product where" +
             "    if(?1 != 'none', ?1, l) = l and" +
             "    if(?2 != 'none', ?2, w) = w and" +

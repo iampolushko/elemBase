@@ -1,0 +1,14 @@
+<div th:fragment = "adminHeader">
+    <ul class="nav nav-tabs">
+        <li class="nav-item">
+            <a class="nav-link" th:classappend="${listsPage} ? active : nothing" href="adminCabinetLists">Списки</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" th:classappend="${editPage} ? active : nothing" href="adminCabinetEdit">Изменить</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" th:classappend="${statisticPage} ? active : nothing" href="adminCabinetStatistics">Статистика</a>
+        </li>
+
+    </ul>
+</div>
